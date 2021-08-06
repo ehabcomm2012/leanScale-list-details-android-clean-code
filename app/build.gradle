@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -30,16 +33,68 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
-dependencies {
+dependencies { configuration ->
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation "androidx.fragment:fragment-ktx:1.3.5"
+    implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    setupRetrofit(configuration)
+    setupHilt(configuration)
+    setupKotlinCoroutines(configuration)
+    setupNavigation(configuration)
+    setUpMockito(configuration)
+}
+
+private static setupRetrofit(configuration) {
+    def retrofit_version = "2.6.0"
+    configuration.implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    configuration.implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    configuration.implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    configuration.implementation("com.squareup.okhttp3:logging-interceptor:3.9.0")
+}
+private static setupHilt(configuration) {
+    configuration.implementation 'com.google.dagger:hilt-android:2.35.1'
+    configuration.implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01"
+    configuration.kapt("com.google.dagger:hilt-android-compiler:2.35.1")
+    configuration.kapt("androidx.hilt:hilt-compiler:1.0.0-alpha01")
+    configuration.implementation 'com.jakewharton.timber:timber:4.7.1'
+}
+private static setupKotlinCoroutines(configuration) {
+    def coroutines_version = "1.3.3"
+    configuration.implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    configuration.implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    configuration.testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.4.2"
+//For InstantTaskExecutorRule
+    configuration.testImplementation "androidx.arch.core:core-testing:2.1.0"
+}
+private static setupNavigation(configuration) {
+    def navigation_version = "2.3.5"
+    configuration.implementation "androidx.navigation:navigation-fragment:$navigation_version"
+    configuration.implementation "androidx.navigation:navigation-ui:$navigation_version"
+    configuration.implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    configuration.implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+    configuration.implementation "androidx.navigation:navigation-dynamic-features-fragment:$navigation_version"
+    configuration.androidTestImplementation "androidx.navigation:navigation-testing:$navigation_version"
+}
+private static setUpMockito(configuration){
+    def mokitoVersion="2.19.0"
+    configuration.testImplementation "org.mockito:mockito-core:$mokitoVersion"
+   // For instrumentation tests on Android devices and emulators
+    configuration.androidTestImplementation "org.mockito:mockito-android:$mokitoVersion"
+    configuration.testImplementation 'org.mockito:mockito-inline:2.13.0'
+    configuration.testImplementation 'net.bytebuddy:byte-buddy-agent:1.10.19'
+    configuration.testImplementation "io.mockk:mockk:1.9.3"
+
 }
