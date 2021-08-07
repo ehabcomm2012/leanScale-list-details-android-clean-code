@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils.centerCrop
 import com.dubizzle.listdetails.R
 import com.dubizzle.listdetails.domain.models.Product
 
@@ -25,9 +27,18 @@ class ProductListAdapter(
 
     override fun onBindViewHolder(holder: CurrencyRateViewHolder, position: Int) {
         val product = productList[position]
-        holder.tvCountry.text = product.name
-        holder.tvRate.text = product.price
-            holder.itemView.setOnClickListener {
+
+        Glide
+            .with(holder.itemView.context)
+            .load(product.image_urls_thumbnails?.get(0))
+            .centerCrop()
+            //.placeholder(R.drawable.loading_spinner)
+            .into(holder.iv_product)
+        holder.tv_title.text = product.name
+        holder.tv_shortDesc.text = product.created_at
+        holder.tv_price.text = product.price
+
+        holder.itemView.setOnClickListener {
                 onItemClick(product)
             }
 
@@ -38,15 +49,19 @@ class ProductListAdapter(
     }
 
     class CurrencyRateViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val eurFlag: AppCompatImageView
-        val tvCountry: AppCompatTextView
-        val tvRate: AppCompatTextView
+        val iv_product: AppCompatImageView
+        val tv_title: AppCompatTextView
+        val tv_shortDesc: AppCompatTextView
+        val tv_rating: AppCompatTextView
+        val tv_price: AppCompatTextView
 
         init {
             // Define click listener for the ViewHolder's View.
-            eurFlag = view.findViewById(R.id.eurFlag)
-            tvCountry = view.findViewById(R.id.tvCountry)
-            tvRate = view.findViewById(R.id.tvRate)
+            iv_product = view.findViewById(R.id.iv_product)
+            tv_title = view.findViewById(R.id.tv_title)
+            tv_shortDesc = view.findViewById(R.id.tv_shortDesc)
+            tv_rating = view.findViewById(R.id.tv_rating)
+            tv_price = view.findViewById(R.id.tv_price)
         }
     }
 }

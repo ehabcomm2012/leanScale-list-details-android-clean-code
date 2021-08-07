@@ -65,15 +65,18 @@ class ProductListFragment : BaseFragment() {
     }
 
     private fun showEmptyState() {
-        Toast.makeText(requireContext(),R.string.no_available_products,Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), R.string.no_available_products, Toast.LENGTH_LONG).show()
     }
 
     private fun submitProductListToAdapter(productList: ProductListResponse) {
         productListAdapter = ProductListAdapter(productList.results!!) {
-            val bundle= Bundle().apply {
-                putSerializable(PRODUCT_DETAILS_KEY,it)
+            val bundle = Bundle().apply {
+                putSerializable(PRODUCT_DETAILS_KEY, it)
             }
-            findNavController().navigate(R.id.action_productListFragment_to_productDetailsFragment,bundle)
+            findNavController().navigate(
+                R.id.action_productListFragment_to_productDetailsFragment,
+                bundle
+            )
         }
         _binding?.rvProductList?.layoutManager = LinearLayoutManager(requireContext())
         _binding?.rvProductList?.adapter = productListAdapter
@@ -82,11 +85,18 @@ class ProductListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setUpClicks()
+    }
 
+    private fun setUpClicks() {
+        _binding?.ivBack?.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 
     companion object {
         const val PRODUCT_DETAILS_KEY = "productDetailsKey"
+
         @JvmStatic
         fun newInstance() =
             ProductListFragment().apply {
