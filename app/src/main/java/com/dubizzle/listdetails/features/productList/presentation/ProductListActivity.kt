@@ -3,9 +3,9 @@ package com.dubizzle.listdetails.features.productList.presentation
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.dubizzle.listdetails.R
-import com.swensonhe.currencyconverter.core.baseUi.BaseActivity
-import com.swensonhe.currencyconverter.core.baseUi.BaseViewModel
-import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.ProductListViewModel
+import com.dubizzle.listdetails.core.baseUi.BaseActivity
+import com.dubizzle.listdetails.core.baseUi.BaseViewModel
+
 import dagger.hilt.android.AndroidEntryPoint
 
 

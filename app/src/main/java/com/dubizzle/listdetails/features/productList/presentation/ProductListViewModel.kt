@@ -1,16 +1,17 @@
-package com.swensonhe.currencyconverter.features.currencyRatesList.presentation
+package com.dubizzle.listdetails.features.productList.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.swensonhe.currencyconverter.core.baseUi.BaseViewModel
-import com.swensonhe.currencyconverter.domain.usecase.GetProductListUseCase
-import com.swensonhe.currencyconverter.features.currencyRatesList.ProductListViewState
+import com.dubizzle.listdetails.core.baseUi.BaseViewModel
+import com.dubizzle.listdetails.domain.usecase.GetProductListUseCase
+import com.dubizzle.listdetails.features.productList.ProductListViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+
 import utils.AppConstants
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext

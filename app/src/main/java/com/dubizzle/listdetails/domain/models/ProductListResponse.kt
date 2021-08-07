@@ -1,4 +1,4 @@
-package com.swensonhe.currencyconverter.domain.models
+package com.dubizzle.listdetails.domain.models
 
 data class ProductListResponse(
     val success: Boolean,

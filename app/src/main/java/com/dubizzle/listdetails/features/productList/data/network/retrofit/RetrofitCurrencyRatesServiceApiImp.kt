@@ -1,7 +1,7 @@
-package com.swensonhe.currencyconverter.features.currencyRatesList.data.network.retrofit
+package com.dubizzle.listdetails.features.productList.data.network.retrofit
 
-import com.swensonhe.currencyconverter.domain.models.ProductListResponse
-import com.swensonhe.currencyconverter.domain.network.apiServices.ProductListServiceApi
+import com.dubizzle.listdetails.domain.models.ProductListResponse
+import com.dubizzle.listdetails.domain.network.apiServices.ProductListServiceApi
 import javax.inject.Inject
 
 

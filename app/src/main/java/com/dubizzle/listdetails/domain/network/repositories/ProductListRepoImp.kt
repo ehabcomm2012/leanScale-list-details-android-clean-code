@@ -1,7 +1,7 @@
-package com.swensonhe.currencyconverter.domain.network.repositories
+package com.dubizzle.listdetails.domain.network.repositories
 
-import com.swensonhe.currencyconverter.domain.models.ProductListResponse
-import com.swensonhe.currencyconverter.domain.network.apiServices.ProductListServiceApi
+import com.dubizzle.listdetails.domain.models.ProductListResponse
+import com.dubizzle.listdetails.domain.network.apiServices.ProductListServiceApi
 import javax.inject.Inject
 
 

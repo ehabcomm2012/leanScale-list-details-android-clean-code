@@ -1,4 +1,4 @@
-package com.swensonhe.currencyconverter.core.baseUi
+package com.dubizzle.listdetails.core.baseUi
 
 import android.app.AlertDialog
 import android.app.ProgressDialog

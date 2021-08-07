@@ -1,4 +1,4 @@
-package com.swensonhe.currencyconverter.features.currencyRatesList.presentation
+package com.dubizzle.listdetails.features.productList.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dubizzle.listdetails.R
+import com.dubizzle.listdetails.core.baseUi.BaseFragment
+import com.dubizzle.listdetails.core.baseUi.BaseViewModel
 import com.dubizzle.listdetails.databinding.FragmentProductListBinding
-import com.swensonhe.currencyconverter.core.baseUi.BaseFragment
-import com.swensonhe.currencyconverter.core.baseUi.BaseViewModel
-import com.swensonhe.currencyconverter.domain.models.ProductListResponse
-import com.swensonhe.currencyconverter.features.currencyRatesList.ProductListViewState
-import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.adapters.ProductListAdapter
+import com.dubizzle.listdetails.domain.models.ProductListResponse
+import com.dubizzle.listdetails.features.productList.ProductListViewState
+import com.dubizzle.listdetails.features.productList.presentation.adapters.ProductListAdapter
 
 
 class ProductListFragment : BaseFragment() {

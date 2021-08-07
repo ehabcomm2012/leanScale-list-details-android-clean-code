@@ -1,7 +1,7 @@
-package com.swensonhe.currencyconverter.domain.usecase
+package com.dubizzle.listdetails.domain.usecase
 
-import com.swensonhe.currencyconverter.domain.network.repositories.ProductListRepoInterface
-import com.swensonhe.currencyconverter.features.currencyRatesList.ProductListViewState
+import com.dubizzle.listdetails.domain.network.repositories.ProductListRepoInterface
+import com.dubizzle.listdetails.features.productList.ProductListViewState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception

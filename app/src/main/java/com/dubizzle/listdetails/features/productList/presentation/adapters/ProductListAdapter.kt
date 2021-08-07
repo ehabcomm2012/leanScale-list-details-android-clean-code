@@ -1,4 +1,4 @@
-package com.swensonhe.currencyconverter.features.currencyRatesList.presentation.adapters
+package com.dubizzle.listdetails.features.productList.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,6 +1,6 @@
-package com.swensonhe.currencyconverter.domain.network.apiServices
+package com.dubizzle.listdetails.domain.network.apiServices
 
-import com.swensonhe.currencyconverter.domain.models.ProductListResponse
+import com.dubizzle.listdetails.domain.models.ProductListResponse
 
 interface ProductListServiceApi {
     suspend fun getCurrencyRates(accessKey:String) : ProductListResponse?

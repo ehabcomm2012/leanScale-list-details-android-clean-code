@@ -1,6 +1,6 @@
-package com.swensonhe.currencyconverter.features.currencyRatesList
+package com.dubizzle.listdetails.features.productList
 
-import com.swensonhe.currencyconverter.domain.models.ProductListResponse
+import com.dubizzle.listdetails.domain.models.ProductListResponse
 
 sealed class ProductListViewState {
     object  LoadingState : ProductListViewState()

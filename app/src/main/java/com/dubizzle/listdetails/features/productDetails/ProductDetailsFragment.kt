@@ -1,4 +1,4 @@
-package com.swensonhe.currencyconverter.features.convertCurrencyDetails
+package com.dubizzle.listdetails.features.productDetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,11 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 
 import androidx.lifecycle.Observer
+import com.dubizzle.listdetails.core.baseUi.BaseFragment
+import com.dubizzle.listdetails.core.baseUi.BaseViewModel
 import com.dubizzle.listdetails.databinding.FragmentProductDetailsBinding
-import com.swensonhe.currencyconverter.core.baseUi.BaseFragment
-import com.swensonhe.currencyconverter.core.baseUi.BaseViewModel
-import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.ProductListFragment
-import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.ProductListViewModel
+import com.dubizzle.listdetails.features.productList.presentation.ProductListFragment
+import com.dubizzle.listdetails.features.productList.presentation.ProductListViewModel
 import java.lang.Exception
 
 

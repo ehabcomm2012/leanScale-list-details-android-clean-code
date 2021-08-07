@@ -1,10 +1,10 @@
-package com.swensonhe.currencyconverter.core.di
+package com.dubizzle.listdetails.core.di
 
-import com.swensonhe.currencyconverter.domain.network.apiServices.ProductListServiceApi
-import com.swensonhe.currencyconverter.domain.network.repositories.ProductListRepoImp
-import com.swensonhe.currencyconverter.domain.network.repositories.ProductListRepoInterface
-import com.swensonhe.currencyconverter.features.currencyRatesList.data.network.retrofit.RetrofitProductListServiceApi
-import com.swensonhe.currencyconverter.features.currencyRatesList.data.network.retrofit.RetrofitCurrencyRatesServiceApiImp
+import com.dubizzle.listdetails.domain.network.apiServices.ProductListServiceApi
+import com.dubizzle.listdetails.domain.network.repositories.ProductListRepoImp
+import com.dubizzle.listdetails.domain.network.repositories.ProductListRepoInterface
+import com.dubizzle.listdetails.features.productList.data.network.retrofit.RetrofitCurrencyRatesServiceApiImp
+import com.dubizzle.listdetails.features.productList.data.network.retrofit.RetrofitProductListServiceApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

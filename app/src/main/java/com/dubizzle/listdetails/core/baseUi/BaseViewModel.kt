@@ -1,4 +1,4 @@
-package com.swensonhe.currencyconverter.core.baseUi
+package com.dubizzle.listdetails.core.baseUi
 
 import androidx.lifecycle.ViewModel
 

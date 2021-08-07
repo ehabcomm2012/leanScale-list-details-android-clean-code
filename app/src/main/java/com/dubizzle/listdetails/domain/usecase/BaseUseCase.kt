@@ -1,4 +1,4 @@
-package com.swensonhe.currencyconverter.domain.usecase
+package com.dubizzle.listdetails.domain.usecase
 
 import kotlinx.coroutines.flow.Flow
 
