@@ -35,7 +35,7 @@ class ProductListFragment : BaseFragment() {
     ): View? {
         _binding = FragmentProductListBinding.inflate(inflater, container, false)
         val view = binding.root
-        productListViewModel.getCurrencyRates()
+        productListViewModel.getProductList()
         return view
     }
 

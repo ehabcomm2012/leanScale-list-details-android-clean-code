@@ -25,7 +25,7 @@ class ProductListViewModel @Inject constructor(private val getProductListUseCase
     private val _viewState: MutableLiveData<ProductListViewState> = MutableLiveData()
 
 
-    fun getCurrencyRates(context: CoroutineContext = Dispatchers.IO) {
+    fun getProductList(context: CoroutineContext = Dispatchers.IO) {
         getProductListUseCase.execute().flowOn(context).onEach {
            _viewState.postValue(it)
         }.launchIn(viewModelScope)
