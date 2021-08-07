@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.DubizzleListDetails"
         tools:ignore="UnusedAttribute">
-        <activity android:name=".features.currencyRatesList.presentation.ProductListActivity"
+        <activity android:name=".features.productList.presentation.ProductListActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             >
             <intent-filter>

@@ -1,6 +1,6 @@
 package com.swensonhe.currencyconverter.domain.models
 
-data class CurrencyRatesResponse(
+data class ProductListResponse(
     val success: Boolean,
     val timestamp: Long,
     val base: String,

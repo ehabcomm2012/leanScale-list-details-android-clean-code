@@ -1,7 +1,6 @@
 package com.swensonhe.currencyconverter.features.currencyRatesList.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,21 +9,21 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dubizzle.listdetails.R
-import com.dubizzle.listdetails.databinding.FragmentCurrencyRatesListBinding
+import com.dubizzle.listdetails.databinding.FragmentProductListBinding
 import com.swensonhe.currencyconverter.core.baseUi.BaseFragment
 import com.swensonhe.currencyconverter.core.baseUi.BaseViewModel
-import com.swensonhe.currencyconverter.domain.models.CurrencyRatesResponse
-import com.swensonhe.currencyconverter.features.currencyRatesList.CurrentRatesViewState
-import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.adapters.CurrencyRatesAdapter
+import com.swensonhe.currencyconverter.domain.models.ProductListResponse
+import com.swensonhe.currencyconverter.features.currencyRatesList.ProductListViewState
+import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.adapters.ProductListAdapter
 
 
-class CurrencyRatesListFragment : BaseFragment() {
-    private val viewModel: CurrencyRatesViewModel by activityViewModels()
+class ProductListFragment : BaseFragment() {
+    private val viewModel: ProductListViewModel by activityViewModels()
     override val baseViewModel: BaseViewModel
         get() = viewModel
-    private var _binding: FragmentCurrencyRatesListBinding? = null
+    private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var currencyRatesAdapter: CurrencyRatesAdapter
+    private lateinit var productListAdapter: ProductListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -33,7 +32,7 @@ class CurrencyRatesListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCurrencyRatesListBinding.inflate(inflater, container, false)
+        _binding = FragmentProductListBinding.inflate(inflater, container, false)
         val view = binding.root
         viewModel.getCurrencyRates()
         return view
@@ -47,31 +46,31 @@ class CurrencyRatesListFragment : BaseFragment() {
 
     }
 
-    private fun setUiState(viewState: CurrentRatesViewState) {
+    private fun setUiState(viewState: ProductListViewState) {
         when (viewState) {
-            is CurrentRatesViewState.FailureState -> {
+            is ProductListViewState.FailureState -> {
                 hideLoader()
                 showFailureNetworkDialog()
             }
-            is CurrentRatesViewState.LoadingState -> {
+            is ProductListViewState.LoadingState -> {
                 showLoader()
             }
-            is CurrentRatesViewState.SuccessState -> {
+            is ProductListViewState.SuccessState -> {
                 hideLoader()
-                submitRatesListToAdapter(viewState.currencyRatesList)
+                submitRatesListToAdapter(viewState.productList)
             }
         }
     }
 
-    private fun submitRatesListToAdapter(currencyRatesList: CurrencyRatesResponse) {
-        currencyRatesAdapter = CurrencyRatesAdapter(currencyRatesList.rates!!) {
+    private fun submitRatesListToAdapter(productList: ProductListResponse) {
+        productListAdapter = ProductListAdapter(productList.rates!!) {
             val bundle= Bundle().apply {
                 putSerializable(CURRENCY_RATE_KEY,it)
             }
-            findNavController().navigate(R.id.action_currencyRatesListFragment_to_convertCurrencyFragment,bundle)
+            findNavController().navigate(R.id.action_productListFragment_to_productDetailsFragment,bundle)
         }
         _binding?.rvCurrencyRates?.layoutManager = LinearLayoutManager(requireContext())
-        _binding?.rvCurrencyRates?.adapter = currencyRatesAdapter
+        _binding?.rvCurrencyRates?.adapter = productListAdapter
 
     }
 
@@ -84,7 +83,7 @@ class CurrencyRatesListFragment : BaseFragment() {
         const val CURRENCY_RATE_KEY = "currencyRateKey"
         @JvmStatic
         fun newInstance() =
-            CurrencyRatesListFragment().apply {
+            ProductListFragment().apply {
                 arguments = Bundle().apply {
                 }
             }

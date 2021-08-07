@@ -8,11 +8,11 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dubizzle.listdetails.R
 
-class CurrencyRatesAdapter(
+class ProductListAdapter(
     private var currencyRates: HashMap<String, Float>,
     val onItemClick: (Pair<String, Float>) -> Unit
 ) :
-    RecyclerView.Adapter<CurrencyRatesAdapter.CurrencyRateViewHolder>() {
+    RecyclerView.Adapter<ProductListAdapter.CurrencyRateViewHolder>() {
 
 
     var countryKeys = currencyRates.map {
@@ -29,7 +29,7 @@ class CurrencyRatesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyRateViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.currency_rates_row, parent, false)
+            .inflate(R.layout.product_list_row, parent, false)
 
         return CurrencyRateViewHolder(view)
     }

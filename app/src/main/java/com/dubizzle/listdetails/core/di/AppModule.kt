@@ -1,9 +1,9 @@
 package com.swensonhe.currencyconverter.core.di
 
-import com.swensonhe.currencyconverter.domain.network.apiServices.CurrencyRateServiceApi
-import com.swensonhe.currencyconverter.domain.network.repositories.CurrencyRatesRepoImp
-import com.swensonhe.currencyconverter.domain.network.repositories.CurrencyRatesRepoInterface
-import com.swensonhe.currencyconverter.features.currencyRatesList.data.network.retrofit.RetrofitCurrencyRatesServiceApi
+import com.swensonhe.currencyconverter.domain.network.apiServices.ProductListServiceApi
+import com.swensonhe.currencyconverter.domain.network.repositories.ProductListRepoImp
+import com.swensonhe.currencyconverter.domain.network.repositories.ProductListRepoInterface
+import com.swensonhe.currencyconverter.features.currencyRatesList.data.network.retrofit.RetrofitProductListServiceApi
 import com.swensonhe.currencyconverter.features.currencyRatesList.data.network.retrofit.RetrofitCurrencyRatesServiceApiImp
 import dagger.Module
 import dagger.Provides
@@ -60,19 +60,19 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit : Retrofit): RetrofitCurrencyRatesServiceApi {
-        return retrofit.create(RetrofitCurrencyRatesServiceApi::class.java)
+    fun provideApiService(retrofit : Retrofit): RetrofitProductListServiceApi {
+        return retrofit.create(RetrofitProductListServiceApi::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideCurrencyRateServiceApi(retrofitCurrencyRatesServiceApi:RetrofitCurrencyRatesServiceApi) : CurrencyRateServiceApi {
-        return RetrofitCurrencyRatesServiceApiImp(retrofitCurrencyRatesServiceApi)
+    fun provideCurrencyRateServiceApi(retrofitProductListServiceApi:RetrofitProductListServiceApi) : ProductListServiceApi {
+        return RetrofitCurrencyRatesServiceApiImp(retrofitProductListServiceApi)
     }
 
     @Singleton
     @Provides
-    fun provideCurrencyRatesRepo( currencyRateServiceApi : CurrencyRateServiceApi): CurrencyRatesRepoInterface {
-        return CurrencyRatesRepoImp(currencyRateServiceApi)
+    fun provideCurrencyRatesRepo(productListServiceApi : ProductListServiceApi): ProductListRepoInterface {
+        return ProductListRepoImp(productListServiceApi)
     }
 }

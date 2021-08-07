@@ -8,33 +8,33 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
 
 import androidx.lifecycle.Observer
-import com.dubizzle.listdetails.databinding.FragmentConvertCurrencyBinding
+import com.dubizzle.listdetails.databinding.FragmentProductDetailsBinding
 import com.swensonhe.currencyconverter.core.baseUi.BaseFragment
 import com.swensonhe.currencyconverter.core.baseUi.BaseViewModel
-import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.CurrencyRatesListFragment
-import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.CurrencyRatesViewModel
+import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.ProductListFragment
+import com.swensonhe.currencyconverter.features.currencyRatesList.presentation.ProductListViewModel
 import java.lang.Exception
 
 
-class ConvertCurrencyFragment : BaseFragment() {
+class ProductDetailsFragment : BaseFragment() {
 
-    private val viewModel: CurrencyRatesViewModel by activityViewModels()
+    private val viewModel: ProductListViewModel by activityViewModels()
     override val baseViewModel: BaseViewModel
         get() = viewModel
     private var initCurrencyRate: Pair<String, Float>? = null
-    private var _binding: FragmentConvertCurrencyBinding? = null
+    private var _binding: FragmentProductDetailsBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initCurrencyRate =
-            arguments?.getSerializable(CurrencyRatesListFragment.CURRENCY_RATE_KEY) as Pair<String, Float>?
+            arguments?.getSerializable(ProductListFragment.CURRENCY_RATE_KEY) as Pair<String, Float>?
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentConvertCurrencyBinding.inflate(inflater, container, false)
+        _binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
