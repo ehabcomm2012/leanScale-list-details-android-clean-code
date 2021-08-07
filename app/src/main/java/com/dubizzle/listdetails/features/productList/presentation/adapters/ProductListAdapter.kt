@@ -7,25 +7,14 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.dubizzle.listdetails.R
+import com.dubizzle.listdetails.domain.models.Product
 
 class ProductListAdapter(
-    private var currencyRates: HashMap<String, Float>,
-    val onItemClick: (Pair<String, Float>) -> Unit
+    private var productList: List<Product>,
+    val onItemClick: (Product) -> Unit
 ) :
     RecyclerView.Adapter<ProductListAdapter.CurrencyRateViewHolder>() {
 
-
-    var countryKeys = currencyRates.map {
-        it.key
-    }
-
-    fun updateList(currencyRates: HashMap<String, Float>) {
-        this.currencyRates = currencyRates
-
-        countryKeys = this.currencyRates.map {
-            it.key
-        }
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyRateViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -35,21 +24,17 @@ class ProductListAdapter(
     }
 
     override fun onBindViewHolder(holder: CurrencyRateViewHolder, position: Int) {
-        holder.itemView.setOnClickListener(null)
-        val country = countryKeys[position]
-        val rate = currencyRates.get(country)
-        holder.tvCountry.text = country
-        holder.tvRate.text = rate.toString()
-        if (country != "EUR") {
+        val product = productList[position]
+        holder.tvCountry.text = product.name
+        holder.tvRate.text = product.price
             holder.itemView.setOnClickListener {
-                onItemClick(Pair(country, rate as Float))
+                onItemClick(product)
             }
-        }
 
     }
 
     override fun getItemCount(): Int {
-        return currencyRates.size
+        return productList.size
     }
 
     class CurrencyRateViewHolder(view: View) : RecyclerView.ViewHolder(view) {

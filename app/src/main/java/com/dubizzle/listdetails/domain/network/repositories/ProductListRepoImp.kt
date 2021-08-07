@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 
  class ProductListRepoImp @Inject constructor(val productListServiceApi : ProductListServiceApi) : ProductListRepoInterface {
-    override suspend fun getCurrencyRates(accessKey: String): ProductListResponse? {
-       return productListServiceApi.getCurrencyRates(accessKey)
+    override suspend fun getProductList(): ProductListResponse? {
+       return productListServiceApi.getProductList()
     }
 }

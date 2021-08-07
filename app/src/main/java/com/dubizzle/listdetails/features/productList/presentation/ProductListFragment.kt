@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -18,9 +19,9 @@ import com.dubizzle.listdetails.features.productList.presentation.adapters.Produ
 
 
 class ProductListFragment : BaseFragment() {
-    private val viewModel: ProductListViewModel by activityViewModels()
+    private val productListViewModel: ProductListViewModel by activityViewModels()
     override val baseViewModel: BaseViewModel
-        get() = viewModel
+        get() = productListViewModel
     private var _binding: FragmentProductListBinding? = null
     private val binding get() = _binding!!
     private lateinit var productListAdapter: ProductListAdapter
@@ -34,13 +35,13 @@ class ProductListFragment : BaseFragment() {
     ): View? {
         _binding = FragmentProductListBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModel.getCurrencyRates()
+        productListViewModel.getCurrencyRates()
         return view
     }
 
 
     override fun subscribeObservers() {
-        viewModel.viewState.observe(viewLifecycleOwner, Observer {
+        productListViewModel.viewState.observe(viewLifecycleOwner, Observer {
             setUiState(it)
         })
 
@@ -57,20 +58,25 @@ class ProductListFragment : BaseFragment() {
             }
             is ProductListViewState.SuccessState -> {
                 hideLoader()
-                submitRatesListToAdapter(viewState.productList)
+                submitProductListToAdapter(viewState.productList)
             }
+            ProductListViewState.EmptyState -> showEmptyState()
         }
     }
 
-    private fun submitRatesListToAdapter(productList: ProductListResponse) {
-        productListAdapter = ProductListAdapter(productList.rates!!) {
+    private fun showEmptyState() {
+        Toast.makeText(requireContext(),R.string.no_available_products,Toast.LENGTH_LONG).show()
+    }
+
+    private fun submitProductListToAdapter(productList: ProductListResponse) {
+        productListAdapter = ProductListAdapter(productList.results!!) {
             val bundle= Bundle().apply {
-                putSerializable(CURRENCY_RATE_KEY,it)
+                putSerializable(PRODUCT_DETAILS_KEY,it)
             }
             findNavController().navigate(R.id.action_productListFragment_to_productDetailsFragment,bundle)
         }
-        _binding?.rvCurrencyRates?.layoutManager = LinearLayoutManager(requireContext())
-        _binding?.rvCurrencyRates?.adapter = productListAdapter
+        _binding?.rvProductList?.layoutManager = LinearLayoutManager(requireContext())
+        _binding?.rvProductList?.adapter = productListAdapter
 
     }
 
@@ -80,7 +86,7 @@ class ProductListFragment : BaseFragment() {
     }
 
     companion object {
-        const val CURRENCY_RATE_KEY = "currencyRateKey"
+        const val PRODUCT_DETAILS_KEY = "productDetailsKey"
         @JvmStatic
         fun newInstance() =
             ProductListFragment().apply {

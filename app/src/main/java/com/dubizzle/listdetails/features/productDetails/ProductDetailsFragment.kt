@@ -4,30 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
-
-import androidx.lifecycle.Observer
 import com.dubizzle.listdetails.core.baseUi.BaseFragment
 import com.dubizzle.listdetails.core.baseUi.BaseViewModel
 import com.dubizzle.listdetails.databinding.FragmentProductDetailsBinding
+import com.dubizzle.listdetails.domain.models.Product
 import com.dubizzle.listdetails.features.productList.presentation.ProductListFragment
 import com.dubizzle.listdetails.features.productList.presentation.ProductListViewModel
-import java.lang.Exception
 
 
 class ProductDetailsFragment : BaseFragment() {
 
-    private val viewModel: ProductListViewModel by activityViewModels()
+    private val productListViewModel: ProductListViewModel by activityViewModels()
     override val baseViewModel: BaseViewModel
-        get() = viewModel
-    private var initCurrencyRate: Pair<String, Float>? = null
+        get() = productListViewModel
+    private var productItem: Product? = null
     private var _binding: FragmentProductDetailsBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initCurrencyRate =
-            arguments?.getSerializable(ProductListFragment.CURRENCY_RATE_KEY) as Pair<String, Float>?
+        productItem = arguments?.getSerializable(ProductListFragment.PRODUCT_DETAILS_KEY) as Product?
     }
 
     override fun onCreateView(
@@ -41,30 +37,16 @@ class ProductDetailsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.currencyRate.value = initCurrencyRate
+        bindData()
     }
 
-    private fun bindData(currencyRate: Pair<String, Float>?) {
-        _binding?.tvRate?.text = (currencyRate?.second!!).toString()
-        _binding?.tvCountry?.text = currencyRate?.first!!
+    private fun bindData() {
+        _binding?.tvRate?.text = productItem?.name
+        _binding?.tvCountry?.text = productItem?.price
     }
 
     override fun subscribeObservers() {
-        viewModel.currencyRate.observe(viewLifecycleOwner, Observer {
-            bindData(it)
-        })
-        _binding?.edtEuroRate?.addTextChangedListener {
-            if (!it.isNullOrEmpty()) {
-                try {
-                    val inputEuroNumber = it.toString().toFloat()
-                    viewModel.calculateCurrencyRate(inputEuroNumber, initCurrencyRate?.second!!)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            } else {
-                _binding?.tvRate?.text = (initCurrencyRate?.second!!).toString()
-            }
-        }
+
     }
 
     override fun onDestroy() {

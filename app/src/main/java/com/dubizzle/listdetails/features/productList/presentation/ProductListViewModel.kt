@@ -19,8 +19,6 @@ import kotlin.coroutines.CoroutineContext
 @HiltViewModel
 class ProductListViewModel @Inject constructor(private val getProductListUseCase: GetProductListUseCase) :
     BaseViewModel() {
-     val currencyRate: MutableLiveData<Pair<String, Float>?> = MutableLiveData()
-
     val viewState: LiveData<ProductListViewState>
         get() = _viewState
 
@@ -28,12 +26,10 @@ class ProductListViewModel @Inject constructor(private val getProductListUseCase
 
 
     fun getCurrencyRates(context: CoroutineContext = Dispatchers.IO) {
-        getProductListUseCase.execute(AppConstants.ACCESS_KEY).flowOn(context).onEach {
+        getProductListUseCase.execute().flowOn(context).onEach {
            _viewState.postValue(it)
         }.launchIn(viewModelScope)
     }
 
-    fun calculateCurrencyRate(inputEuroNumber: Float ,euroRate:Float) {
-        currencyRate.postValue(Pair(currencyRate.value!!.first,inputEuroNumber * euroRate))
-    }
+
 }

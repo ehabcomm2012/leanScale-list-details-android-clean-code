@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 
 class RetrofitCurrencyRatesServiceApiImp @Inject constructor(val retrofitProductListServiceApi: RetrofitProductListServiceApi) : ProductListServiceApi {
-    override suspend fun getCurrencyRates(accessKey: String): ProductListResponse? {
-        return retrofitProductListServiceApi.getCurrencyRates(accessKey)
+    override suspend fun getProductList(): ProductListResponse? {
+        return retrofitProductListServiceApi.getProductList()
     }
 }

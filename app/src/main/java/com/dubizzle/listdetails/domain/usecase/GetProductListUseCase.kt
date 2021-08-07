@@ -8,17 +8,17 @@ import java.lang.Exception
 import javax.inject.Inject
 
  class GetProductListUseCase @Inject constructor(val productListRepoInterface: ProductListRepoInterface) :
-    BaseUseCase<String, ProductListViewState?>() {
-    override fun execute(accessKey: String): Flow<ProductListViewState?> {
+    BaseUseCase<String?, ProductListViewState?>() {
+    override fun execute(params: String?): Flow<ProductListViewState?> {
         return flow {
             emit(ProductListViewState.LoadingState)
             try {
-                val ratesList = productListRepoInterface.getCurrencyRates(accessKey)
+                val productList = productListRepoInterface.getProductList()
 
-                if (ratesList != null && ratesList.success)
-                    emit(ProductListViewState.SuccessState(ratesList))
+                if (productList?.results!=null)
+                    emit(ProductListViewState.SuccessState(productList))
                 else
-                    emit(ProductListViewState.FailureState("Failed from the server error"))
+                    emit(ProductListViewState.EmptyState)
 
             } catch (e: Exception) {
                 e.printStackTrace()
