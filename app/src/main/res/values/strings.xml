@@ -4,4 +4,5 @@
     <string name="network_down">Network connection is down !!</string>
     <string name="warning">Warning !!</string>
     <string name="no_available_products">No Avaialble Products now ...</string>
+    <string name="dubizzle">Dubizzle</string>
 </resources>
