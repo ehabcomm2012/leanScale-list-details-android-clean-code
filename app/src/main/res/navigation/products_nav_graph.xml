@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/productListFragment"
-        android:name="com.dubizzle.listdetails.features.productList.presentation.ProductListFragment"
+        android:name="com.leanscale.listdetails.features.productList.presentation.ProductListFragment"
         android:label="fragment_product_list"
         tools:layout="@layout/fragment_product_list" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/productDetailsFragment"
-        android:name="com.dubizzle.listdetails.features.productDetails.ProductDetailsFragment"
+        android:name="com.leanscale.listdetails.features.productDetails.ProductDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_product_details" >
         <action
