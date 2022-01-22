@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">Dubizzle List Details</string>
+    <string name="app_name">LeanScale Games</string>
     <string name="loading">Loading</string>
     <string name="network_down">Network connection is down !!</string>
     <string name="warning">Warning !!</string>
-    <string name="no_available_products">No Avaialble Products now ...</string>
-    <string name="dubizzle">Dubizzle</string>
+    <string name="no_available_games">No Avaialble Games now ...</string>
+    <string name="leanscale">LeanScale</string>
 </resources>

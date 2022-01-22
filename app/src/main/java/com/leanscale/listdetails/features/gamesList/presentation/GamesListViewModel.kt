@@ -1,11 +1,11 @@
-package com.leanscale.listdetails.features.productList.presentation
+package com.leanscale.listdetails.features.gamesList.presentation
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.leanscale.listdetails.core.baseUi.BaseViewModel
-import com.leanscale.listdetails.domain.usecase.GetProductListUseCase
-import com.leanscale.listdetails.features.productList.ProductListViewState
+import com.leanscale.listdetails.domain.usecase.GetGamesListUseCase
+import com.leanscale.listdetails.features.gamesList.GamesListViewState
 
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -18,16 +18,16 @@ import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
-class ProductListViewModel @Inject constructor(private val getProductListUseCase: GetProductListUseCase) :
+class GamesListViewModel @Inject constructor(private val getGamesListUseCase: GetGamesListUseCase) :
     BaseViewModel() {
-    val viewState: LiveData<ProductListViewState>
+    val viewState: LiveData<GamesListViewState>
         get() = _viewState
 
-    private val _viewState: MutableLiveData<ProductListViewState> = MutableLiveData()
+    private val _viewState: MutableLiveData<GamesListViewState> = MutableLiveData()
 
 
     fun getProductList(context: CoroutineContext = Dispatchers.IO) {
-        getProductListUseCase.execute().flowOn(context).onEach {
+        getGamesListUseCase.execute().flowOn(context).onEach {
            _viewState.postValue(it)
         }.launchIn(viewModelScope)
     }

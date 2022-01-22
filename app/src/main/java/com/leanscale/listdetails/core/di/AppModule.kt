@@ -1,10 +1,10 @@
 package com.leanscale.listdetails.core.di
 
-import com.leanscale.listdetails.domain.network.apiServices.ProductListServiceApi
-import com.leanscale.listdetails.domain.network.repositories.ProductListRepoImp
-import com.leanscale.listdetails.domain.network.repositories.ProductListRepoInterface
-import com.leanscale.listdetails.features.productList.data.network.retrofit.RetrofitCurrencyRatesServiceApiImp
-import com.leanscale.listdetails.features.productList.data.network.retrofit.RetrofitProductListServiceApi
+import com.leanscale.listdetails.domain.network.apiServices.GamesListServiceApi
+import com.leanscale.listdetails.domain.network.repositories.GamesListRepoImp
+import com.leanscale.listdetails.domain.network.repositories.GamesListRepoInterface
+import com.leanscale.listdetails.features.gamesList.data.network.retrofit.RetrofitGamesListServiceApiImp
+import com.leanscale.listdetails.features.gamesList.data.network.retrofit.RetrofitGamesListServiceApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -60,19 +60,19 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit : Retrofit): RetrofitProductListServiceApi {
-        return retrofit.create(RetrofitProductListServiceApi::class.java)
+    fun provideApiService(retrofit : Retrofit): RetrofitGamesListServiceApi {
+        return retrofit.create(RetrofitGamesListServiceApi::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideCurrencyRateServiceApi(retrofitProductListServiceApi:RetrofitProductListServiceApi) : ProductListServiceApi {
-        return RetrofitCurrencyRatesServiceApiImp(retrofitProductListServiceApi)
+    fun provideCurrencyRateServiceApi(retrofitGamesListServiceApi:RetrofitGamesListServiceApi) : GamesListServiceApi {
+        return RetrofitGamesListServiceApiImp(retrofitGamesListServiceApi)
     }
 
     @Singleton
     @Provides
-    fun provideCurrencyRatesRepo(productListServiceApi : ProductListServiceApi): ProductListRepoInterface {
-        return ProductListRepoImp(productListServiceApi)
+    fun provideCurrencyRatesRepo(gamesListServiceApi : GamesListServiceApi): GamesListRepoInterface {
+        return GamesListRepoImp(gamesListServiceApi)
     }
 }

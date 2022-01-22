@@ -1,4 +1,4 @@
-package com.leanscale.listdetails.features.productList.presentation
+package com.leanscale.listdetails.features.gamesList.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,19 +12,19 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.leanscale.listdetails.R
 import com.leanscale.listdetails.core.baseUi.BaseFragment
 import com.leanscale.listdetails.core.baseUi.BaseViewModel
-import com.leanscale.listdetails.databinding.FragmentProductListBinding
+import com.leanscale.listdetails.databinding.FragmentGamesListBinding
 import com.leanscale.listdetails.domain.models.ProductListResponse
-import com.leanscale.listdetails.features.productList.ProductListViewState
-import com.leanscale.listdetails.features.productList.presentation.adapters.ProductListAdapter
+import com.leanscale.listdetails.features.gamesList.GamesListViewState
+import com.leanscale.listdetails.features.gamesList.presentation.adapters.GamesListAdapter
 
 
-class ProductListFragment : BaseFragment() {
-    private val productListViewModel: ProductListViewModel by activityViewModels()
+class GamesListFragment : BaseFragment() {
+    private val gamesListViewModel: GamesListViewModel by activityViewModels()
     override val baseViewModel: BaseViewModel
-        get() = productListViewModel
-    private var _binding: FragmentProductListBinding? = null
+        get() = gamesListViewModel
+    private var _binding: FragmentGamesListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var productListAdapter: ProductListAdapter
+    private lateinit var gamesListAdapter: GamesListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -33,53 +33,53 @@ class ProductListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentProductListBinding.inflate(inflater, container, false)
+        _binding = FragmentGamesListBinding.inflate(inflater, container, false)
         val view = binding.root
-        productListViewModel.getProductList()
+        gamesListViewModel.getProductList()
         return view
     }
 
 
     override fun subscribeObservers() {
-        productListViewModel.viewState.observe(viewLifecycleOwner, Observer {
+        gamesListViewModel.viewState.observe(viewLifecycleOwner, Observer {
             setUiState(it)
         })
 
     }
 
-    private fun setUiState(viewState: ProductListViewState) {
+    private fun setUiState(viewState: GamesListViewState) {
         when (viewState) {
-            is ProductListViewState.FailureState -> {
+            is GamesListViewState.FailureState -> {
                 hideLoader()
                 showFailureNetworkDialog()
             }
-            is ProductListViewState.LoadingState -> {
+            is GamesListViewState.LoadingState -> {
                 showLoader()
             }
-            is ProductListViewState.SuccessState -> {
+            is GamesListViewState.SuccessState -> {
                 hideLoader()
                 submitProductListToAdapter(viewState.productList)
             }
-            ProductListViewState.EmptyState -> showEmptyState()
+            GamesListViewState.EmptyState -> showEmptyState()
         }
     }
 
     private fun showEmptyState() {
-        Toast.makeText(requireContext(), R.string.no_available_products, Toast.LENGTH_LONG).show()
+        Toast.makeText(requireContext(), R.string.no_available_games, Toast.LENGTH_LONG).show()
     }
 
     private fun submitProductListToAdapter(productList: ProductListResponse) {
-        productListAdapter = ProductListAdapter(productList.results!!) {
+        gamesListAdapter = GamesListAdapter(productList.results!!) {
             val bundle = Bundle().apply {
                 putSerializable(PRODUCT_DETAILS_KEY, it)
             }
             findNavController().navigate(
-                R.id.action_productListFragment_to_productDetailsFragment,
+                R.id.action_gamesListFragment_to_gameDetailsFragment,
                 bundle
             )
         }
         _binding?.rvProductList?.layoutManager = LinearLayoutManager(requireContext())
-        _binding?.rvProductList?.adapter = productListAdapter
+        _binding?.rvProductList?.adapter = gamesListAdapter
 
     }
 
@@ -99,7 +99,7 @@ class ProductListFragment : BaseFragment() {
 
         @JvmStatic
         fun newInstance() =
-            ProductListFragment().apply {
+            GamesListFragment().apply {
                 arguments = Bundle().apply {
                 }
             }

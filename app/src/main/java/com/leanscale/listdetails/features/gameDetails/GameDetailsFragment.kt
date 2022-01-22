@@ -1,4 +1,4 @@
-package com.leanscale.listdetails.features.productDetails
+package com.leanscale.listdetails.features.gameDetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,31 +10,31 @@ import com.bumptech.glide.Glide
 import com.leanscale.listdetails.R
 import com.leanscale.listdetails.core.baseUi.BaseFragment
 import com.leanscale.listdetails.core.baseUi.BaseViewModel
-import com.leanscale.listdetails.databinding.FragmentProductDetailsBinding
+import com.leanscale.listdetails.databinding.FragmentGameDetailsBinding
 import com.leanscale.listdetails.domain.models.Product
-import com.leanscale.listdetails.features.productList.presentation.ProductListFragment
-import com.leanscale.listdetails.features.productList.presentation.ProductListViewModel
+import com.leanscale.listdetails.features.gamesList.presentation.GamesListFragment
+import com.leanscale.listdetails.features.gamesList.presentation.GamesListViewModel
 
 
-class ProductDetailsFragment : BaseFragment() {
+class GameDetailsFragment : BaseFragment() {
 
-    private val productListViewModel: ProductListViewModel by activityViewModels()
+    private val gamesListViewModel: GamesListViewModel by activityViewModels()
     override val baseViewModel: BaseViewModel
-        get() = productListViewModel
+        get() = gamesListViewModel
     private var productItem: Product? = null
-    private var _binding: FragmentProductDetailsBinding? = null
+    private var _binding: FragmentGameDetailsBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         productItem =
-            arguments?.getSerializable(ProductListFragment.PRODUCT_DETAILS_KEY) as Product?
+            arguments?.getSerializable(GamesListFragment.PRODUCT_DETAILS_KEY) as Product?
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentProductDetailsBinding.inflate(inflater, container, false)
+        _binding = FragmentGameDetailsBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }

@@ -1,10 +1,11 @@
 package com.dubizzle.listdetails.features.productList.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.dubizzle.listdetails.domain.models.Product
-import com.dubizzle.listdetails.domain.models.ProductListResponse
-import com.dubizzle.listdetails.domain.usecase.GetProductListUseCase
-import com.dubizzle.listdetails.features.productList.ProductListViewState
+import com.leanscale.listdetails.domain.models.Product
+import com.leanscale.listdetails.domain.models.ProductListResponse
+import com.leanscale.listdetails.domain.usecase.GetGamesListUseCase
+import com.leanscale.listdetails.features.gamesList.GamesListViewState
+import com.leanscale.listdetails.features.gamesList.presentation.GamesListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flow
@@ -43,8 +44,8 @@ class ProductListViewModelTest {
     @Test
     fun `test get product list when success api request`() = runBlockingTest {
 
-        val getProductListUseCase = Mockito.mock(GetProductListUseCase::class.java)
-        val testResponseSucessState = ProductListViewState.SuccessState(
+        val getProductListUseCase = Mockito.mock(GetGamesListUseCase::class.java)
+        val testResponseSucessState = GamesListViewState.SuccessState(
             ProductListResponse(
                 results = listOf(
                     Product(
@@ -61,7 +62,7 @@ class ProductListViewModelTest {
         Mockito.`when`(getProductListUseCase.execute()).thenReturn(flow {
             emit(testResponseSucessState)
         })
-        val productListViewModel = ProductListViewModel(getProductListUseCase)
+        val productListViewModel = GamesListViewModel(getProductListUseCase)
 
         productListViewModel.getProductList(Dispatchers.Main)
 

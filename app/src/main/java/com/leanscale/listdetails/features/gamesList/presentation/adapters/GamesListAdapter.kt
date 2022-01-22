@@ -1,4 +1,4 @@
-package com.leanscale.listdetails.features.productList.presentation.adapters
+package com.leanscale.listdetails.features.gamesList.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +11,16 @@ import com.leanscale.listdetails.R
 import com.leanscale.listdetails.domain.models.Product
 
 
-class ProductListAdapter(
+class GamesListAdapter(
     private var productList: List<Product>,
     val onItemClick: (Product) -> Unit
 ) :
-    RecyclerView.Adapter<ProductListAdapter.CurrencyRateViewHolder>() {
+    RecyclerView.Adapter<GamesListAdapter.CurrencyRateViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyRateViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.product_list_row, parent, false)
+            .inflate(R.layout.game_list_item, parent, false)
 
         return CurrencyRateViewHolder(view)
     }

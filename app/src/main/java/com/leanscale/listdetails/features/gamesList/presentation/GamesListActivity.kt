@@ -1,4 +1,4 @@
-package com.leanscale.listdetails.features.productList.presentation
+package com.leanscale.listdetails.features.gamesList.presentation
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -10,12 +10,12 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class ProductListActivity : BaseActivity() {
-    private val viewModel: ProductListViewModel by viewModels()
+class GamesListActivity : BaseActivity() {
+    private val viewModel: GamesListViewModel by viewModels()
     override val baseViewModel: BaseViewModel
         get() = viewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.product_list_activity_layout)
+        setContentView(R.layout.games_list_activity_layout)
     }
 }

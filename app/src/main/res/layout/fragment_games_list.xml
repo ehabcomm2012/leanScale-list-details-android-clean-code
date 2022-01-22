@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:gravity="start|center"
-                android:text="Dubizzle"
+                android:text="@string/leanscale"
                 android:textAlignment="viewStart"
                 android:textColor="@color/white"
                 android:textSize="16dp"
@@ -70,7 +70,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/product_list_row"
+        tools:listitem="@layout/game_list_item"
         tools:itemCount="20"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
