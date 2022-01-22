@@ -13,7 +13,7 @@ import com.leanscale.listdetails.R
 import com.leanscale.listdetails.core.baseUi.BaseFragment
 import com.leanscale.listdetails.core.baseUi.BaseViewModel
 import com.leanscale.listdetails.databinding.FragmentGamesListBinding
-import com.leanscale.listdetails.domain.models.ProductListResponse
+import com.leanscale.listdetails.domain.models.GamesListResponse
 import com.leanscale.listdetails.features.gamesList.GamesListViewState
 import com.leanscale.listdetails.features.gamesList.presentation.adapters.GamesListAdapter
 
@@ -35,7 +35,7 @@ class GamesListFragment : BaseFragment() {
     ): View? {
         _binding = FragmentGamesListBinding.inflate(inflater, container, false)
         val view = binding.root
-        gamesListViewModel.getProductList()
+        gamesListViewModel.getGamesList()
         return view
     }
 
@@ -58,7 +58,7 @@ class GamesListFragment : BaseFragment() {
             }
             is GamesListViewState.SuccessState -> {
                 hideLoader()
-                submitProductListToAdapter(viewState.productList)
+                submitProductListToAdapter(viewState.gamesList)
             }
             GamesListViewState.EmptyState -> showEmptyState()
         }
@@ -68,8 +68,8 @@ class GamesListFragment : BaseFragment() {
         Toast.makeText(requireContext(), R.string.no_available_games, Toast.LENGTH_LONG).show()
     }
 
-    private fun submitProductListToAdapter(productList: ProductListResponse) {
-        gamesListAdapter = GamesListAdapter(productList.results!!) {
+    private fun submitProductListToAdapter(gamesList: GamesListResponse) {
+        gamesListAdapter = GamesListAdapter(gamesList.results!!) {
             val bundle = Bundle().apply {
                 putSerializable(PRODUCT_DETAILS_KEY, it)
             }
@@ -78,8 +78,8 @@ class GamesListFragment : BaseFragment() {
                 bundle
             )
         }
-        _binding?.rvProductList?.layoutManager = LinearLayoutManager(requireContext())
-        _binding?.rvProductList?.adapter = gamesListAdapter
+        _binding?.rvGamesList?.layoutManager = LinearLayoutManager(requireContext())
+        _binding?.rvGamesList?.adapter = gamesListAdapter
 
     }
 

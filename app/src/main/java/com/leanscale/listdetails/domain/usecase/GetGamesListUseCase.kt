@@ -1,5 +1,6 @@
 package com.leanscale.listdetails.domain.usecase
 
+import com.leanscale.listdetails.domain.models.GamesRequest
 import com.leanscale.listdetails.domain.network.repositories.GamesListRepoInterface
 import com.leanscale.listdetails.features.gamesList.GamesListViewState
 import kotlinx.coroutines.flow.Flow
@@ -8,23 +9,26 @@ import java.lang.Exception
 import javax.inject.Inject
 
  class GetGamesListUseCase @Inject constructor(val gamesListRepoInterface: GamesListRepoInterface) :
-    BaseUseCase<String?, GamesListViewState?>() {
-    override fun execute(params: String?): Flow<GamesListViewState?> {
-        return flow {
-            emit(GamesListViewState.LoadingState)
-            try {
-                val gamesList = gamesListRepoInterface.getGamesList()
+    BaseUseCase<GamesRequest, GamesListViewState?>() {
 
-                if (gamesList?.results!=null)
-                    emit(GamesListViewState.SuccessState(gamesList))
-                else
-                    emit(GamesListViewState.EmptyState)
 
-            } catch (e: Exception) {
-                e.printStackTrace()
-                emit(GamesListViewState.FailureState("network connection error"))
+     override fun execute(gamesRequest: GamesRequest?): Flow<GamesListViewState?> {
+         return flow {
+             emit(GamesListViewState.LoadingState)
+             try {
+                 val gamesList = gamesListRepoInterface.getGamesList(gamesRequest?.key!!,gamesRequest?.pageSize,gamesRequest.page)
 
-            }
-        }
-    }
-}
+                 if (gamesList?.results!=null)
+                     emit(GamesListViewState.SuccessState(gamesList))
+                 else
+                     emit(GamesListViewState.EmptyState)
+
+             } catch (e: Exception) {
+                 e.printStackTrace()
+                 emit(GamesListViewState.FailureState("network connection error"))
+
+             }
+         }
+     }
+
+ }

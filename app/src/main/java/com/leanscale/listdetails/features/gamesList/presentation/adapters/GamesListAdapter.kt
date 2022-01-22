@@ -8,12 +8,12 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leanscale.listdetails.R
-import com.leanscale.listdetails.domain.models.Product
+import com.leanscale.listdetails.domain.models.Games
 
 
 class GamesListAdapter(
-    private var productList: List<Product>,
-    val onItemClick: (Product) -> Unit
+    private var gamesList: List<Games>,
+    val onItemClick: (Games) -> Unit
 ) :
     RecyclerView.Adapter<GamesListAdapter.CurrencyRateViewHolder>() {
 
@@ -26,30 +26,30 @@ class GamesListAdapter(
     }
 
     override fun onBindViewHolder(holder: CurrencyRateViewHolder, position: Int) {
-        val product = productList[position]
+        val game = gamesList[position]
 
         Glide
             .with(holder.itemView.context)
-            .load(product.image_urls_thumbnails?.get(0))
+            .load(game.background_image)
             .centerCrop()
             //.placeholder(R.drawable.loading_spinner)
-            .into(holder.iv_product)
-        holder.tv_title.text = product.name
-        holder.tv_shortDesc.text = product.created_at
-        holder.tv_price.text = product.price
+            .into(holder.iv_game)
+        holder.tv_title.text = game.name
+        holder.tv_shortDesc.text = game.released
+        holder.tv_rating.text = game.rating?.toString()
 
         holder.itemView.setOnClickListener {
-                onItemClick(product)
+                onItemClick(game)
             }
 
     }
 
     override fun getItemCount(): Int {
-        return productList.size
+        return gamesList.size
     }
 
     class CurrencyRateViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val iv_product: AppCompatImageView
+        val iv_game: AppCompatImageView
         val tv_title: AppCompatTextView
         val tv_shortDesc: AppCompatTextView
         val tv_rating: AppCompatTextView
@@ -57,7 +57,7 @@ class GamesListAdapter(
 
         init {
             // Define click listener for the ViewHolder's View.
-            iv_product = view.findViewById(R.id.iv_product)
+            iv_game = view.findViewById(R.id.iv_game)
             tv_title = view.findViewById(R.id.tv_title)
             tv_shortDesc = view.findViewById(R.id.tv_shortDesc)
             tv_rating = view.findViewById(R.id.tv_rating)

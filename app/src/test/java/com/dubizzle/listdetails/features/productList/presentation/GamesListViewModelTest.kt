@@ -1,8 +1,9 @@
 package com.dubizzle.listdetails.features.productList.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.leanscale.listdetails.domain.models.Product
-import com.leanscale.listdetails.domain.models.ProductListResponse
+import com.leanscale.listdetails.domain.models.Games
+import com.leanscale.listdetails.domain.models.GamesListResponse
+import com.leanscale.listdetails.domain.models.GamesRequest
 import com.leanscale.listdetails.domain.usecase.GetGamesListUseCase
 import com.leanscale.listdetails.features.gamesList.GamesListViewState
 import com.leanscale.listdetails.features.gamesList.presentation.GamesListViewModel
@@ -19,9 +20,10 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito
+import utils.AppConstants
 
 @ExperimentalCoroutinesApi
-class ProductListViewModelTest {
+class GamesListViewModelTest {
 
     @ExperimentalCoroutinesApi
     private val testDispatcher = TestCoroutineDispatcher()
@@ -44,29 +46,33 @@ class ProductListViewModelTest {
     @Test
     fun `test get product list when success api request`() = runBlockingTest {
 
-        val getProductListUseCase = Mockito.mock(GetGamesListUseCase::class.java)
+        val getGamesListUseCase = Mockito.mock(GetGamesListUseCase::class.java)
         val testResponseSucessState = GamesListViewState.SuccessState(
-            ProductListResponse(
+            GamesListResponse(
                 results = listOf(
-                    Product(
-                        created_at = "2019-02-24 04:04:17",
-                        price = "AED 5",
+                    Games(
+                        id="",
+                        released = "2019-02-24 04:04:17",
                         name = "Notebook",
-                        uid = "4878bf592579410fba52941d00b62f94",
-                        image_ids = listOf("4878bf592579410fba52941d00b62f94"),
-                        image_urls_thumbnails = listOf("9355183956e3445e89735d877b798689")
+                        rating = 4.6f,
+                        background_image = "",
+                        genres = listOf()
                     )
                 )
             )
         )
-        Mockito.`when`(getProductListUseCase.execute()).thenReturn(flow {
+        val testGamesRequest= GamesRequest(
+            AppConstants.API_KEY,
+            10,
+            1)
+        Mockito.`when`(getGamesListUseCase.execute(testGamesRequest)).thenReturn(flow {
             emit(testResponseSucessState)
         })
-        val productListViewModel = GamesListViewModel(getProductListUseCase)
+        val gamesListViewModel = GamesListViewModel(getGamesListUseCase)
 
-        productListViewModel.getProductList(Dispatchers.Main)
+        gamesListViewModel.getGamesList(Dispatchers.Main)
 
-        val viewStateData = productListViewModel.viewState.value
+        val viewStateData = gamesListViewModel.viewState.value
         assertEquals(testResponseSucessState, viewStateData)
     }
 }

@@ -11,7 +11,7 @@ import com.leanscale.listdetails.R
 import com.leanscale.listdetails.core.baseUi.BaseFragment
 import com.leanscale.listdetails.core.baseUi.BaseViewModel
 import com.leanscale.listdetails.databinding.FragmentGameDetailsBinding
-import com.leanscale.listdetails.domain.models.Product
+import com.leanscale.listdetails.domain.models.Games
 import com.leanscale.listdetails.features.gamesList.presentation.GamesListFragment
 import com.leanscale.listdetails.features.gamesList.presentation.GamesListViewModel
 
@@ -21,13 +21,13 @@ class GameDetailsFragment : BaseFragment() {
     private val gamesListViewModel: GamesListViewModel by activityViewModels()
     override val baseViewModel: BaseViewModel
         get() = gamesListViewModel
-    private var productItem: Product? = null
+    private var gamesItem: Games? = null
     private var _binding: FragmentGameDetailsBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        productItem =
-            arguments?.getSerializable(GamesListFragment.PRODUCT_DETAILS_KEY) as Product?
+        gamesItem =
+            arguments?.getSerializable(GamesListFragment.PRODUCT_DETAILS_KEY) as Games?
     }
 
     override fun onCreateView(
@@ -45,19 +45,19 @@ class GameDetailsFragment : BaseFragment() {
     }
 
     private fun bindData() {
-        _binding?.toolbar?.title = productItem?.name
+        _binding?.toolbar?.title = gamesItem?.name
         _binding?.collapsingToolbarLayout?.contentScrim =
             ContextCompat.getDrawable(requireContext(), R.color.teal_200)
 
         Glide
             .with(requireContext())
-            .load(productItem?.image_urls_thumbnails?.get(0))
+            .load(gamesItem?.background_image)
             .centerCrop()
-            .into(_binding?.ivProduct!!)
-        _binding?.tvTitle?.text = productItem?.name
-        _binding?.tvShortDesc?.text = productItem?.created_at
-        _binding?.tvPrice?.text = productItem?.price
-        _binding?.tvLotPrice?.text = productItem?.price
+            .into(_binding?.ivGame!!)
+        _binding?.tvTitle?.text = gamesItem?.name
+        _binding?.tvShortDesc?.text = gamesItem?.released
+        _binding?.tvProductTotalRate?.text =gamesItem?.rating?.toString()
+        _binding?.tvLotPrice?.text =  gamesItem?.genres?.get(0)?.name
 
     }
 
