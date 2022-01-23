@@ -47,7 +47,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="23sp"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     android:layout_marginBottom="40dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -127,7 +127,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="PKR 56990"
+            android:text="Description"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textStyle="bold" />
 
@@ -142,7 +142,7 @@
         android:layout_marginStart="26dp"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:visibility="gone"
+        android:visibility="visible"
         tools:visibility="visible"
         app:cardBackgroundColor="@color/teal_200"
         app:layout_anchor="@id/app_bar"

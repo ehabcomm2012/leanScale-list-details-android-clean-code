@@ -10,11 +10,10 @@ import com.leanscale.listdetails.R
 
 abstract class BaseFragment : Fragment() {
     abstract val baseViewModel: BaseViewModel
-    abstract fun subscribeObservers()
+
     lateinit var progressDialg: ProgressDialog
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        subscribeObservers()
     }
 
     fun showFailureNetworkDialog() {

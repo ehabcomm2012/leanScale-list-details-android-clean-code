@@ -8,15 +8,28 @@ import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.leanscale.listdetails.R
-import com.leanscale.listdetails.domain.models.Games
+import com.leanscale.listdetails.domain.models.Game
 
 
 class GamesListAdapter(
-    private var gamesList: List<Games>,
-    val onItemClick: (Games) -> Unit
+    private var gamesList: ArrayList<Game>,
+    val onItemClick: (Game) -> Unit,
+    val onReachLastItem: () -> Unit
 ) :
     RecyclerView.Adapter<GamesListAdapter.CurrencyRateViewHolder>() {
 
+    fun bindList(list: ArrayList<Game>) {
+//        gamesList.let {
+//           // it.addAll(list)
+//            it.clear()
+//            it.addAll(list)
+//            notifyDataSetChanged()
+//        }
+        gamesList=list
+        notifyDataSetChanged()
+
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyRateViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -39,8 +52,10 @@ class GamesListAdapter(
         holder.tv_rating.text = game.rating?.toString()
 
         holder.itemView.setOnClickListener {
-                onItemClick(game)
-            }
+            onItemClick(game)
+        }
+        if (position == gamesList.size-1)
+            onReachLastItem.invoke()
 
     }
 

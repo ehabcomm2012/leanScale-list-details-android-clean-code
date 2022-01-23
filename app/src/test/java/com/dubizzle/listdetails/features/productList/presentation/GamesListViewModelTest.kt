@@ -1,8 +1,7 @@
 package com.dubizzle.listdetails.features.productList.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.leanscale.listdetails.domain.models.Games
-import com.leanscale.listdetails.domain.models.GamesListResponse
+import com.leanscale.listdetails.domain.models.Game
 import com.leanscale.listdetails.domain.models.GamesRequest
 import com.leanscale.listdetails.domain.usecase.GetGamesListUseCase
 import com.leanscale.listdetails.features.gamesList.GamesListViewState
@@ -48,9 +47,8 @@ class GamesListViewModelTest {
 
         val getGamesListUseCase = Mockito.mock(GetGamesListUseCase::class.java)
         val testResponseSucessState = GamesListViewState.SuccessState(
-            GamesListResponse(
-                results = listOf(
-                    Games(
+            listOf(
+                    Game(
                         id="",
                         released = "2019-02-24 04:04:17",
                         name = "Notebook",
@@ -59,8 +57,9 @@ class GamesListViewModelTest {
                         genres = listOf()
                     )
                 )
+        ,1000
             )
-        )
+
         val testGamesRequest= GamesRequest(
             AppConstants.API_KEY,
             10,
@@ -70,7 +69,7 @@ class GamesListViewModelTest {
         })
         val gamesListViewModel = GamesListViewModel(getGamesListUseCase)
 
-        gamesListViewModel.getGamesList(Dispatchers.Main)
+        gamesListViewModel.getNextGamesListPage(Dispatchers.Main)
 
         val viewStateData = gamesListViewModel.viewState.value
         assertEquals(testResponseSucessState, viewStateData)

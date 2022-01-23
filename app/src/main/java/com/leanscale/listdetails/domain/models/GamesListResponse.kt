@@ -3,10 +3,11 @@ package com.leanscale.listdetails.domain.models
 import java.io.Serializable
 
 data class GamesListResponse(
-    val results: List<Games>?
+    val count:Int,
+    val results: List<Game>?
 )
 
-data class Games(
+data class Game(
     val id: String,
     val name: String = "",
     val released: String?,

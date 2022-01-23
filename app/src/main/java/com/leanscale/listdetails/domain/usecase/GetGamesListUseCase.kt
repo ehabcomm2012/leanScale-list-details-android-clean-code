@@ -16,10 +16,10 @@ import javax.inject.Inject
          return flow {
              emit(GamesListViewState.LoadingState)
              try {
-                 val gamesList = gamesListRepoInterface.getGamesList(gamesRequest?.key!!,gamesRequest?.pageSize,gamesRequest.page)
+                 val gamesListResponse = gamesListRepoInterface.getGamesList(gamesRequest?.key!!,gamesRequest?.pageSize,gamesRequest.page)
 
-                 if (gamesList?.results!=null)
-                     emit(GamesListViewState.SuccessState(gamesList))
+                 if (gamesListResponse?.results!=null)
+                     emit(GamesListViewState.SuccessState(gamesListResponse.results,gamesListResponse.count))
                  else
                      emit(GamesListViewState.EmptyState)
 

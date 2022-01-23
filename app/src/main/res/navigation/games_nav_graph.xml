@@ -12,7 +12,12 @@
         tools:layout="@layout/fragment_games_list" >
         <action
             android:id="@+id/action_gamesListFragment_to_gameDetailsFragment"
-            app:destination="@id/gameDetailsFragment" />
+            app:destination="@id/gameDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            />
     </fragment>
 
     <fragment
@@ -20,11 +25,13 @@
         android:name="com.leanscale.listdetails.features.gameDetails.GameDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_game_details" >
-        <action
-            android:id="@+id/action_gameDetailsFragment_to_gamesListFragment"
+        <action android:id="@+id/action_gameDetailsFragment_to_gamesListFragment"
             app:destination="@id/gamesListFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
             app:popUpTo="@+id/gamesListFragment"
-            app:popUpToInclusive="true"
-            />
+            app:popUpToInclusive="true"/>
     </fragment>
 </navigation>

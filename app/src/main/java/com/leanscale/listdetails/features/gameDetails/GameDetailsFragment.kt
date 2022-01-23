@@ -11,7 +11,7 @@ import com.leanscale.listdetails.R
 import com.leanscale.listdetails.core.baseUi.BaseFragment
 import com.leanscale.listdetails.core.baseUi.BaseViewModel
 import com.leanscale.listdetails.databinding.FragmentGameDetailsBinding
-import com.leanscale.listdetails.domain.models.Games
+import com.leanscale.listdetails.domain.models.Game
 import com.leanscale.listdetails.features.gamesList.presentation.GamesListFragment
 import com.leanscale.listdetails.features.gamesList.presentation.GamesListViewModel
 
@@ -21,13 +21,13 @@ class GameDetailsFragment : BaseFragment() {
     private val gamesListViewModel: GamesListViewModel by activityViewModels()
     override val baseViewModel: BaseViewModel
         get() = gamesListViewModel
-    private var gamesItem: Games? = null
+    private var gameItem: Game? = null
     private var _binding: FragmentGameDetailsBinding? = null
     private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        gamesItem =
-            arguments?.getSerializable(GamesListFragment.PRODUCT_DETAILS_KEY) as Games?
+        gameItem =
+            arguments?.getSerializable(GamesListFragment.GAME_DETAILS_KEY) as Game?
     }
 
     override fun onCreateView(
@@ -45,25 +45,22 @@ class GameDetailsFragment : BaseFragment() {
     }
 
     private fun bindData() {
-        _binding?.toolbar?.title = gamesItem?.name
+        _binding?.toolbar?.title = gameItem?.name
         _binding?.collapsingToolbarLayout?.contentScrim =
             ContextCompat.getDrawable(requireContext(), R.color.teal_200)
 
         Glide
             .with(requireContext())
-            .load(gamesItem?.background_image)
+            .load(gameItem?.background_image)
             .centerCrop()
             .into(_binding?.ivGame!!)
-        _binding?.tvTitle?.text = gamesItem?.name
-        _binding?.tvShortDesc?.text = gamesItem?.released
-        _binding?.tvProductTotalRate?.text =gamesItem?.rating?.toString()
-        _binding?.tvLotPrice?.text =  gamesItem?.genres?.get(0)?.name
+        _binding?.tvTitle?.text = gameItem?.name
+        _binding?.tvShortDesc?.text = gameItem?.released
+        _binding?.tvRating?.text =gameItem?.rating?.toString()
+        _binding?.tvLotPrice?.text =  gameItem?.genres?.get(0)?.name
 
     }
 
-    override fun subscribeObservers() {
-
-    }
 
     override fun onDestroy() {
         super.onDestroy()
