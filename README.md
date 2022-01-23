@@ -10,4 +10,5 @@ Technologies used :
  navigation graph,
  Kotlin Coroutine,
  Retrofit2,
+ handle saving state after while rotation in list screen
  Junit unit test ,...
