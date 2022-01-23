@@ -1,4 +1,4 @@
-package com.dubizzle.listdetails.features.productList.presentation
+package com.leanscale.listdetails.features.productList.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.leanscale.listdetails.domain.models.Game
